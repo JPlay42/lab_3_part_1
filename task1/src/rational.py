@@ -61,13 +61,18 @@ class Rational:
                self.__numerator == other.__numerator
 
     def __ne__(self, other):
-        return self.__denominator != other.__denominator and \
+        return self.__denominator != other.__denominator or \
                self.__numerator != other.__numerator
 
     @staticmethod
-    def __add_by_arguments(n1: int, d1: int, n2: int, d2: int):
-        common_d = lcm(d1, d2)
-        return Rational(common_d // d1 * n1 + common_d // d2 * n2, common_d)
+    def __add_by_arguments(numerator_1: int,
+                           denominator_1: int,
+                           numerator_2: int,
+                           denominator_2: int):
+        common_denominator = lcm(denominator_1, denominator_2)
+        new_numerator_1 = common_denominator // denominator_1 * numerator_1
+        new_numerator_2 = common_denominator // denominator_2 * numerator_2
+        return Rational(new_numerator_1 + new_numerator_2, common_denominator)
 
     def __str__(self):
         return f'{self.__numerator}/{self.__denominator}'
